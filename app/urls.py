@@ -1,14 +1,10 @@
-from django.urls import path
-from .views import ClientView,DeviceView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from django.urls import path, include
+from .views import ClientView, DeviceView, ManufacturerView, ModelView
+from rest_framework import routers
 
-urlpatterns = [
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('client/', ClientView.as_view(), name='client'),
-    path('device/', DeviceView.as_view(), name='device')
-
-]
+router = routers.DefaultRouter()
+router.register(r'client', ClientView)
+router.register(r'device', DeviceView)
+router.register(r'manufacturer', ManufacturerView)
+router.register(r'model', ModelView)
+urlpatterns = router.urls

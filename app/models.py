@@ -3,13 +3,17 @@ from django.db import models
 
 class Manufacturer(models.Model):
     name = models.CharField(max_length=200)
+
     def __str__(self):
         return self.name
 
+
 class Model(models.Model):
     name = models.CharField(max_length=35)
+
     def __str__(self):
         return self.name
+
 
 class Device(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
@@ -17,7 +21,6 @@ class Device(models.Model):
     price = models.FloatField()
     actual_price = models.FloatField()
     is_active = models.BooleanField()
-
 
 
 class Client(models.Model):
