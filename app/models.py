@@ -16,8 +16,8 @@ class Model(models.Model):
 
 
 class Device(models.Model):
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    model = models.ForeignKey(Model, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, related_name='manufacturer', on_delete=models.CASCADE)
+    model = models.ForeignKey(Model, related_name='model', on_delete=models.CASCADE)
     price = models.FloatField()
     actual_price = models.FloatField()
     is_active = models.BooleanField()
