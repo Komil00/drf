@@ -1,32 +1,42 @@
 from django.db import models
 
+# class Manufacturer(models.Model):  # ishlab chiqarish
+#     name = models.CharField(max_length=200)
+#
+#     def __str__(self):
+#         return self.name
+#
+#
+# class Model(models.Model):
+#     name = models.CharField(max_length=35)
+#
+#     def __str__(self):
+#         return self.name
 
-class Manufacturer(models.Model):
-    name = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.name
-
-
-class Model(models.Model):
-    name = models.CharField(max_length=35)
-
-    def __str__(self):
-        return self.name
-
-
-class Device(models.Model):
-    manufacturer = models.ForeignKey(Manufacturer, related_name='manufacturer', on_delete=models.CASCADE)
-    model = models.ForeignKey(Model, related_name='model', on_delete=models.CASCADE)
+class Device(models.Model):  # qurilma
+    manufacturer = models.CharField(max_length=30)  # ishlab chiqarish
+    model = models.CharField(max_length=30)
     price = models.FloatField()
     actual_price = models.FloatField()
     is_active = models.BooleanField()
 
+    # def lock(self):
+    #     is_active = True
+    #
+    # def unlock(self):
+    #     is_active = False
+
+    def __str__(self):
+        return self.model
+
 
 class Client(models.Model):
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=35)
     birthdate = models.DateField()
     passport = models.CharField(max_length=35)
+    image = models.ImageField(upload_to='images/')
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=30)
 
@@ -34,7 +44,7 @@ class Client(models.Model):
         return self.fullname
 
 
-class Loan(models.Model):
+class Loan(models.Model):  # qarz
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     created = models.DateTimeField()
@@ -43,11 +53,9 @@ class Loan(models.Model):
     first_pay = models.FloatField()
     end_date = models.DateTimeField()
     month_pay = models.FloatField()
-    # def __str__(self):
-    #     return self.client
 
 
-class LoadPayment(models.Model):
+class LoadPayment(models.Model):  # kredit tulovi
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
     amount = models.FloatField()
     created = models.DateTimeField()

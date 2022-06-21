@@ -1,10 +1,19 @@
 from django.contrib import admin
-from .models import Device,Client,Loan,LoadPayment,Model,Manufacturer
+from rest_framework.decorators import action
+
+from rest_framework.response import Response
+
+from .models import Device, Client, Loan, LoadPayment
+
+
 # Register your models here.
 
-admin.site.register(Model)
-admin.site.register(Manufacturer)
-admin.site.register(Device)
+
+@admin.register(Device)
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ('model', 'is_active')
+
+
 admin.site.register(Client)
 admin.site.register(Loan)
 admin.site.register(LoadPayment)
