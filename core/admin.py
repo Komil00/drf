@@ -3,6 +3,38 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
+#
+# class AdminUserPermissionMixin:
+#     def has_view_permission(self, request, obj=None):
+#         return request.user.is_admin
+#
+#     def has_add_permission(self, request):
+#         return request.user.is_admin
+#
+#     def has_change_permission(self, request, obj=None):
+#         return request.user.is_admin
+#
+#     def has_delete_permission(self, request, obj=None):
+#         return request.user.is_admin
+#
+#     def has_module_permission(self, request):
+#         return request.user.is_admin
+#
+#
+# class FirstAdmin(AdminUserPermissionMixin, admin.ModelAdmin):
+#     list_display = (
+#         'id',
+#         'title',
+#         'author'
+#     )
+#
+#
+# class SecondAdmin(AdminUserPermissionMixin, admin.ModelAdmin):
+#     list_display = (
+#         'id',
+#         'category',
+#     )
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -20,6 +52,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
+
     list_display = ('username', 'last_name', 'first_name', 'email', 'is_staff', 'is_active',)
     list_filter = ('username', 'email', 'is_staff', 'is_active',)
     fieldsets = (
@@ -29,7 +62,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email','role', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('username', 'email', 'role', 'password1', 'password2', 'is_staff', 'is_active')}
          ),
     )
     search_fields = ('email',)
@@ -37,3 +70,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
+# admin.site.register(FirstAdmin)

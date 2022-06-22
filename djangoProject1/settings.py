@@ -175,10 +175,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'komiltuev@icloud.com'
-EMAIL_HOST_PASSWORD = 'Zaqwsx123.'
+EMAIL_HOST_PASSWORD = '*'
 EMAIL_PORT = 587
 
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
 
 AUTH_USER_MODEL = 'core.CustomUser'
+
