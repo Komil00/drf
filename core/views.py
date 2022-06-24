@@ -1,38 +1,34 @@
 from rest_framework import viewsets, generics
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import CustomUserSerializers, UserSerializer
+from .serializers import CustomUserSerializers
 from .models import CustomUser
 
-from rest_framework.permissions import BasePermission
-
-SAFE_METHODS = ('GET', 'HEAD', 'OPTIONS')
+from rest_framework import permissions
 
 
-class IsAuthorOrReadOnly(BasePermission):
+from rest_framework import permissions
+
+
+class AuthorOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        """
-        Return True if permission is granted, False otherwise.
-        """
-        return bool(request.user and request.user.is_authenticated)
+        if request.user.is_authenticated:
+            return True
+        return False
 
     # def has_object_permission(self, request, view, obj):
-    #     """
-    #     Return True if permission is granted, False otherwise.
-    #     """
-    #     return bool(
-    #         request.method in SAFE_METHODS or
-    #         obj.author == request.user
-    #     )
+    #     if obj.author == request.user:
+    #         return True
+    #     return False
 
 
 class UsersViewSet(viewsets.ModelViewSet):
-    # authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthorOrReadOnly]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [AuthorOrReadOnly]
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializers
-
 
 # class UserView(generics.RetrieveUpdateAPIView):
 #     queryset = CustomUser.objects.all()
@@ -49,4 +45,3 @@ class UsersViewSet(viewsets.ModelViewSet):
 #                 serializer.save(instance=instance)
 #             else:
 #                 return None
-

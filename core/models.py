@@ -34,7 +34,10 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-ROLE = (('admin', 'ADMIN'), ('manager', 'MANAGER'), ('operator', 'OPERATOR'))
+admin = 1
+manager = 2
+operator = 3
+ROLE = ((admin, 'ADMIN'), (manager, 'MANAGER'), (operator, 'OPERATOR'))
 
 
 class CustomUser(AbstractUser):

@@ -21,12 +21,6 @@ class Device(models.Model):  # qurilma
     actual_price = models.FloatField()
     is_active = models.BooleanField()
 
-    # def lock(self):
-    #     is_active = True
-    #
-    # def unlock(self):
-    #     is_active = False
-
     def __str__(self):
         return self.model
 
