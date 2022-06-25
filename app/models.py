@@ -12,6 +12,7 @@ from django.db import models
 #
 #     def __str__(self):
 #         return self.name
+from core.models import CustomUser
 
 
 class Device(models.Model):  # qurilma
@@ -26,7 +27,7 @@ class Device(models.Model):  # qurilma
 
 
 class Client(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=35)
     birthdate = models.DateField()
     passport = models.CharField(max_length=35)

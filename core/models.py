@@ -34,10 +34,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-admin = 1
-manager = 2
-operator = 3
-ROLE = ((admin, 'ADMIN'), (manager, 'MANAGER'), (operator, 'OPERATOR'))
+ROLE = (('admin', 'ADMIN'), ('manager', 'MANAGER'))
 
 
 class CustomUser(AbstractUser):
@@ -54,4 +51,4 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
