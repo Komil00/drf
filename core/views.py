@@ -21,7 +21,7 @@ from rest_framework import permissions
 class AuthorOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        if not request.user.is_authenticated:
+        if request.user.is_authenticated:
             return True
         return False
 
@@ -47,10 +47,9 @@ class AuthorOrReadOnly(permissions.BasePermission):
 #         return JsonResponse(doc_serializer.errors, status=400)
 
 
-class UserList(generics.CreateAPIView):
+class UsersViewCreate(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializers
-    permission_classes = [AuthorOrReadOnly]
 
     # def list(self, request):
     #     # Note the use of `get_queryset()` instead of `self.queryset`
@@ -59,8 +58,8 @@ class UserList(generics.CreateAPIView):
     #     return Response(serializer.data)
 
 
-class UsersViewSet(generics.ListAPIView):
-    # authentication_classes = [SessionAuthentication, BasicAuthentication]
+class UsersViewList(generics.ListAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializers
