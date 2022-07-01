@@ -4,7 +4,6 @@ from .views import LoanListView
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-# router.register(r'', BaseView)
 router.register(r'client', ClientViewSet)
 router.register(r'device', DeviceViewSet)
 
