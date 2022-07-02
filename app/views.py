@@ -10,9 +10,3 @@ class LoanListView(generics.ListCreateAPIView):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     permission_classes = [IsAdminUser]
-
-    # def list(self, request):
-    #     # Note the use of `get_queryset()` instead of `self.queryset`
-    #     queryset = self.get_queryset()
-    #     serializer = LoanSerializer(queryset, many=True)
-    #     return Response(serializer.data)

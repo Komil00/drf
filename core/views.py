@@ -79,3 +79,8 @@ class UsersViewList(generics.ListAPIView):
 #                 serializer.save(instance=instance)
 #             else:
 #                 return None
+
+
+# class AccountView(generics.ListCreateAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = AccountSerializer
